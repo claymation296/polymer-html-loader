@@ -1,14 +1,14 @@
 {
   "name": "polymer-css-loader",
   "version": "0.0.1",
-  "description": "Automatically generate the JavaScript style css that is required for Polymer and Web Components, simply by importing the css file",
+  "description": "A Webpack Loader that creates a Polymer Template from HTML files automatically",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-ts \"./tests/**/*.spec.ts\" "
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/superjose/polymer-css-loader.git"
+    "url": "git+https://github.com/longlost/polymer-html-loader.git"
   },
   "keywords": [
     "polymer",
@@ -17,12 +17,12 @@
     "loader",
     "automatic"
   ],
-  "author": "Jose Asilis",
+  "author": "Longlost Dev",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/superjose/polymer-css-loader/issues"
+    "url": "https://github.com/longlost/polymer-html-loader/issues"
   },
-  "homepage": "https://github.com/superjose/polymer-css-loader#readme",
+  "homepage": "https://github.com/longlost/polymer-html-loader#readme",
   "devDependencies": {
     "@types/jasmine": "^2.8.8",
     "@types/node": "^10.5.2",
