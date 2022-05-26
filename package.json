@@ -1,5 +1,5 @@
 {
-  "name": "polymer-css-loader",
+  "name": "polymer-html-loader",
   "version": "0.0.1",
   "description": "A Webpack Loader that creates a Polymer Template from HTML files automatically",
   "main": "index.js",
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "polymer",
-    "css",
+    "html",
     "webpack",
     "loader",
     "automatic"
