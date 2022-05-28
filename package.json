@@ -41,7 +41,6 @@
     "webpack": "^4.15.1"
   },
   "dependencies": {
-    "camelcase": "^5.0.0",
-    "minify-css-string": "^1.0.0"
+    "html-minifier-terser": "^7.0.0-alpha.2"
   }
 }

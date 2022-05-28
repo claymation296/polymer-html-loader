@@ -53,11 +53,13 @@ module.exports = {
 ```
 2. Include your .html file in your JavaScript:
 ```javascript
-import {PolymerElement } from '@polymer/polymer/polymer-element';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
-import template from './polymer-test-component.html';
+import template from './my-element.html';
 
-class PolymerTestComponent extends PolymerElement {
+
+class MyElement extends PolymerElement {
+
   static get template() {
     return template;
   }
@@ -72,28 +74,28 @@ class PolymerTestComponent extends PolymerElement {
   }
 }
 
-window.customElements.define('polymer-test-component', PolymerTestComponent);
+window.customElements.define('my-element', MyElement);
 ```
 
 # Options
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**[`minify`](#minify)**|`{Boolean}`|`false`|When true, it Will minify both the HTML and JavaScript output.
-|**[`defaultSkip`](#minify)**|`{Boolean}`|`false`|When true, Will minify both the HTML and JavaScript output.
+|**[`minify`](#minify)**|`{Boolean}`|`false`|When true, it will minify both the HTML and JavaScript output.
+|**[`defaultSkip`](#minify)**|`{Boolean}`|`false`|When true, it will not process files, unless explicitly included.
 
 # Files Parameters
 These are appended at the end of the HTML imports in your JavaScript file (Where the component is declared);
 E.g: 
 
 ```javascript
-import './my-component.html?skip';
+import './my-element.html?skip';
 ```
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**[`skip`](#minify)**|`{boolean}`|`N/A`|Just setting this parameter will skip the html altogether. This may be useful if you're using React and Polymer or you'd like to include the HTML without. E.g: `import './my-component.html?skip'`
-|**[`include`](#minify)**|`{boolean}`|`N/A`|Just setting this parameter will include the html even when defaultSkip is on. This may be useful if you just want to "polymerize" or "web-componentize" an .html file. E.g:  `import './my-component.html?include'`. **Note**: `include` will take preference over `skip`.
+|**[`skip`](#minify)**|`{boolean}`|`N/A`|Setting this parameter will skip processing altogether. This may be useful if you're using React and Polymer or you'd like to include the HTML without. E.g: `import './my-element.html?skip'`
+|**[`include`](#minify)**|`{boolean}`|`N/A`|Setting this parameter will include the html even when defaultSkip is on. This may be useful if you just want to "polymerize" or "web-componentize" an .html file. E.g:  `import './my-element.html?include'`. **Note**: `include` will take preference over `defaultSkip`.
 
 # Need an example? 
 Navigate to [test-app](./test-app), and execute: `npm start`. It will launch an express server @ localhost:3000. Then, run `webpack`. (Remember to have installed webpack-cli)
@@ -101,6 +103,8 @@ Navigate to [test-app](./test-app), and execute: `npm start`. It will launch an 
 
 # Why this loader
 Writing HTML inside a JavaScript file is cumbersome and we lose autocomplete, and static analysis from our Text Editors and IDEs. Why not have an automatic way that creates these Polymer Templates for us? 
+
+Also, as of Polymer v3.5, using the 'html' template function as a regular javascript function (e.g html([myHtmlString])) is prohibited. This is due to v3.5's support for Trusted Types, which help prevent XSS attacks.
 
 With this, you just include your .html template in your Polymer component, and you're set! The loader takes care for creating the file for you!
 
