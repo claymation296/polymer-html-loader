@@ -1,6 +1,6 @@
 {
   "name": "polymer-html-loader",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Webpack Loader that creates a Polymer Template from HTML files automatically",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,6 @@
     "webpack": "^4.15.1"
   },
   "dependencies": {
-    "camelcase": "^5.0.0",
-    "minify-css-string": "^1.0.0"
+    "html-minifier-terser": "^7.0.0-alpha.2"
   }
 }

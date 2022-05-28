@@ -1,57 +1,35 @@
-const camelCase = require('camelcase');
 
 /**
- * Generates the code or the template that is required for the styles 
- * to happen, ex:
  * 
- * const styleElement = document.createElement('dom-module');
-
-styleElement.innerHTML = `
-    <template>
-        <style>
-            div {
-                height:500px;
-                width:100px;
-                background-color: red;
-            }
-        </style>
-    </template>
-`;
+ *  Generates the code that is required for Polymer's 'template' method, ex:
+ * 
+ *    import {html} from '@polymer/polymer/polymer-element.js';
+ *
+ *    export default const template = html`
+ *      <style>
+ *        div {
+ *          height:500px;
+ *          width:100px;
+ *          background-color: red;
+ *        }
+ *      </style>
+ * 
+ *      <div>Hello World</div>
+ *    `;
+ * 
  */
 
-/**
- * Deletes any whitespace or hyphen and creates a camelCase
- * approach
- */
-function parseStyleElementName(unparsedStyleElementName) {
-  return camelCase(unparsedStyleElementName);
-}
+// Guard against XSS by having webpack inject the string
+// from each .hmtl file directly into Polymer's 'html' tagged
+// template function, rather than calling it as a normal js function.
+// Calling 'html' as a function is not allowed as of Polymer v3.5.
+module.exports.generateTemplate = source => `
+    import {html} from '@polymer/polymer/polymer-element.js';
 
-function generateDomModule(styleElementName) {
-  return `const ${styleElementName} =  document.createElement('dom-module');`;
-}
+    export default html\`${source}\`;
+  `;
 
 
-function wrapWithTags(styleElementName, parsedFileContents) {
-  return `${styleElementName}.innerHTML = \`
-        <template>
-            <style>
-                ${ parsedFileContents}
-            </style>
-        </template>\`;`;
-}
+module.exports.minTemplate = source => 
+  `import{html}from'@polymer/polymer/polymer-element.js';export default html\`${source}\`;`;
 
-function registerElement(styleElementName, unparsedStyleElementName) {
-  return `
-        ${styleElementName}.register('${unparsedStyleElementName}');
-     `
-}
-
-module.exports = function (unparsedStyleElementName, parsedFileContents) {
-  const styleElementName = parseStyleElementName(unparsedStyleElementName);
-  return `
-        ${generateDomModule(styleElementName)}
-        ${wrapWithTags(styleElementName, parsedFileContents)}
-        ${registerElement(styleElementName, unparsedStyleElementName)}
-    `
-}
